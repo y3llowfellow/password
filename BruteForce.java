@@ -1,12 +1,23 @@
+import java.security.NoSuchAlgorithmException;
+
 public class BruteForce {
     static boolean found = false;
     static String[] allCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".split("");
     public String password;
-    public BruteForce(String password){
+
+    //user will input -p for plaintext, -m for MD5, -b for BCrypt, and -s for SHA256
+    public String mode;
+
+    public BruteForce(String password, String mode){
         this.password = password;
+        this.mode = mode;
+        if(!(mode.equals("-p") || mode.equals("-m") || mode.equals("-s")|| mode.equals("-b"))){
+            System.out.println("Invalid mode entered, defaulting to plain text dictionary search");
+            this.mode = "-p";
+        }
     }
 
-    public void guessPassword() {
+    public void guessPassword() throws NoSuchAlgorithmException {
         int passwordLength = 1;
         //use while loop to test every single password length, starting at 1 and increasing by 1 each time
         //stop brute forcing once password is found (found == true)
@@ -17,7 +28,7 @@ public class BruteForce {
         }
     }
 
-    public void permute (int a, String word){
+    public void permute (int a, String word) throws NoSuchAlgorithmException {
         //keep preforming recursion and adding characters until String word reaches the desired length
         if(a !=0 && !found) {
             for (int i = 0; i < allCharacters.length; i++) {
@@ -30,9 +41,20 @@ public class BruteForce {
                 permute(a - 1, word);
             }
         }
+        //convert the word into the correct hash, by default, hashedword is set to plain text in line 45
+        String hashedWord = word;
+        if(mode.equals("-m")){
+            hashedWord = Hasher.MD5(word);
+        }
+        if(mode.equals("-s")){
+            hashedWord = Hasher.SHA256(word);
+        }
+        if(mode.equals("-b")){
+
+        }
         //if the word matches password, print it out and set the boolean found to true
-        if(word.equals(password)){
-            System.out.println("password found!");
+        if(hashedWord.equals(password)){
+            System.out.println("Password found using Brute Force!");
             System.out.println(word);
             found = true;
         }
