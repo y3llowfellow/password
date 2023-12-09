@@ -6,6 +6,17 @@ public class BruteForce {
         this.password = password;
     }
 
+    public void guessPassword() {
+        int passwordLength = 1;
+        //use while loop to test every single password length, starting at 1 and increasing by 1 each time
+        //stop brute forcing once password is found (found == true)
+        while(!found) {
+            //call recursive method to brute force every permutation
+            permute(passwordLength, "");
+            passwordLength++;
+        }
+    }
+
     public void permute (int a, String word){
         //keep preforming recursion and adding characters until String word reaches the desired length
         if(a !=0 && !found) {
