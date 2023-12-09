@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 public class Hasher {
 
 
-    public Hasher(){
+    public Hasher() {
 
     }
 
@@ -37,7 +37,7 @@ public class Hasher {
         return sb.toString();
     }
 
-    public static String BCrypt(String message){
+    public static String BCrypt(String message) {
         return "";
     }
 }
