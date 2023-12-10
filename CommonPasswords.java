@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
+import JBCrypt.BCrypt;
 
 public class CommonPasswords {
     public String password;
@@ -28,7 +28,7 @@ public class CommonPasswords {
         try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\colin\\Documents\\GitHub\\password\\10-million-password-list-top-10000.txt"))) {
             String line;
             //reading the line
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null && !found) {
                 //Convert line to MD5 Hash
                 switch (mode) {
                     case "-m": {
@@ -40,8 +40,14 @@ public class CommonPasswords {
                         }
                         break;
                     }
-                    //Convert line to BCrypt Hash
-                    case "-b":
+                    //Check if line matches BCrypt Hash
+                    case "-b":{
+                        if (BCrypt.checkpw(line, password)){
+                            System.out.println("Password found in the list of 10k most common passwords!");
+                            System.out.println(line);
+                            found = true;
+                        }
+                    }
 
                         break;
                     //Convert line to SHA-256 hash

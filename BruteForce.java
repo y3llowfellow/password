@@ -1,5 +1,5 @@
 import java.security.NoSuchAlgorithmException;
-
+import JBCrypt.BCrypt;
 public class BruteForce {
     static boolean found = false;
     static String[] allCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".split("");
@@ -21,6 +21,7 @@ public class BruteForce {
         int passwordLength = 1;
         //use while loop to test every single password length, starting at 1 and increasing by 1 each time
         //stop brute forcing once password is found (found == true)
+        found = false;
         while (!found) {
             //call recursive method to brute force every permutation
             permute(passwordLength, "");
@@ -49,11 +50,9 @@ public class BruteForce {
         if (mode.equals("-s")) {
             hashedWord = Hasher.SHA256(word);
         }
-        if (mode.equals("-b")) {
-
-        }
         //if the word matches password, print it out and set the boolean found to true
-        if (hashedWord.equals(password)) {
+        //however, if user chose b crypt
+        if (hashedWord.equals(password) || (mode.equals("-b") && BCrypt.checkpw(word, password))) {
             System.out.println("Password found using Brute Force!");
             System.out.println(word);
             found = true;
