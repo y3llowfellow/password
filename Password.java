@@ -5,7 +5,7 @@ public class Password {
         //user inputs plain text, SHA256, MD5, or BCrypt text
         String password = args[0];
 
-        //user determines what technique to use. -bf is brute force, -cp is common passwords
+        //user determines what technique to use. -bf is brute force, -d is dictionary
         String mode = args[1];
 
         //user inputs that type of hash the password is. -p is plain text, -b is Bcrypt, -s is SHA256, -m is MD5.
