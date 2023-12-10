@@ -7,7 +7,7 @@ A simple password cracker tool in Java with support for different techniques.
 To use the Password Cracker, run the following command:
 
 ```bash
-java PasswordCracker <password> <technique> <hashType>
+java Password <password> <technique> <hashType>
 
 <password>: The target password you want to crack.
 <technique>: The technique to use for cracking. Use -bf for brute force or -d for dictionary.
@@ -38,3 +38,10 @@ https://github.com/y3llowfellow/password
 javac Password.java
 ```
 3. Run the program as described in the usage section.
+
+## Dependencies
+Make sure to download the JBCrypt package from https://github.com/jeremyh/jBCrypt and include it in your project.
+
+## Licensing and Credits
+All credits go to Colin Shen and Cody Wang!
+
