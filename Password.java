@@ -12,14 +12,20 @@ public class Password {
         //user inputs that type of hash the password is. -p is plain text, -b is Bcrypt, -s is SHA256, -m is MD5.
         String hashType = args[2];
 
-        boolean useRainbowTable = args.length == 4 && args[3].equals("-y");
+        //-rt for rainbow table
+        boolean useRainbowTable = args.length == 4 && args[3].equals("-rt");
 
-
-        if(mode.equals("-bf")){
+        //Brute Force mode
+        if(mode.equals("-bf") && !useRainbowTable){
             (new BruteForce(password,hashType)).guessPassword();
         }
+        else if (mode.equals("-bf") && useRainbowTable){
+            System.out.println("Rainbow table can only be used for dictionary attack!");
+        }
+
+        //Dictionary Attack
         else{
-            //if user wants to use RainBow table
+            //if user wants to use Rainbow table
             if(useRainbowTable){
                 (new CommonPasswords(password, hashType)).guessPasswordRT();
             }

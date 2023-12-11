@@ -11,6 +11,7 @@ public class BruteForce {
     public BruteForce(String password, String mode) {
         this.password = password;
         this.mode = mode;
+        //if user inputs the wrong mode
         if (!(mode.equals("-p") || mode.equals("-m") || mode.equals("-s") || mode.equals("-b"))) {
             System.out.println("Invalid mode entered, defaulting to plain text dictionary search");
             this.mode = "-p";

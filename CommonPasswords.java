@@ -30,34 +30,35 @@ public class CommonPasswords {
         boolean found = false;
         // search the MD5 hashes instead, if user inputs -m
         if (mode.equals("-m")){
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\colin\\Documents\\GitHub\\password\\10k-rainbowTable-MD5.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\colin\\Documents\\GitHub\\password\\10k-rainbowTable-MD5"));
             String line;
-            int lineNumber = 1;
+
             //reading the line
             while ((line = br.readLine()) != null && !found) {
-                line = line.substring(6);
+                int lineNumber = Integer.parseInt(line.substring(0,5))-1;
+                //get line number
+                line = line.substring(5);
                 //if the hashes match, then the word is found
                 if (line.equals(password)) {
                     //print out the output
                     System.out.println("Password found in the list of 10k most common passwords!");
                     //print out corresponding line number of the plain text
-
                     try (Stream<String> lines = Files.lines(Paths.get("C:\\Users\\colin\\Documents\\GitHub\\password\\10-million-password-list-top-10000.txt"))) {
-                        System.out.println(lines.skip((lineNumber+1)/2).findFirst().get());
+                        System.out.println(lines.skip(lineNumber).findFirst().get());
                     }
-                    lineNumber++;
                     found = true;
                 }
 
             }
         }
         else if(mode.equals("-s")){
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\colin\\Documents\\GitHub\\password\\10k-rainbowTable-SHA256.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\colin\\Documents\\GitHub\\password\\10k-rainbowTable-SHA256"));
             String line;
-            int lineNumber = 1;
             //reading the line
             while ((line = br.readLine()) != null && !found) {
-                line = line.substring(6);
+                int lineNumber = Integer.parseInt(line.substring(0,5))-1;
+                //get line number
+                line = line.substring(5);
                 //if the hashes match, then the word is found
                 if (line.equals(password)) {
                     //print out the output
@@ -65,13 +66,13 @@ public class CommonPasswords {
                     //print out corresponding line number of the plain text
 
                     try (Stream<String> lines = Files.lines(Paths.get("C:\\Users\\colin\\Documents\\GitHub\\password\\10-million-password-list-top-10000.txt"))) {
-                        System.out.println(lines.skip((lineNumber)/2).findFirst().get());
+                        System.out.println(lines.skip(lineNumber).findFirst().get());
                     }
-                    lineNumber++;
                     found = true;
                 }
 
             }
+
         } else{
             System.out.println("Invalid mode entered. Rainbow Table can only be used for MD5 and SHA256 passwords");
         }

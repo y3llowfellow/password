@@ -14,7 +14,7 @@ public class RainbowTableGenerator {
             String line;
             //counter to demarcate corresponding word in the regular file
             int i = 1;
-            //use printwriter to create and change a text file
+            //use Printwriter to create and change a text file
             PrintWriter reader = new PrintWriter("C:\\Users\\colin\\Documents\\GitHub\\password\\10k-rainbowTable-MD5");
             //reading the line
             while ((line = br.readLine()) != null) {

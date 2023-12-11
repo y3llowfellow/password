@@ -37,7 +37,4 @@ public class Hasher {
         return sb.toString();
     }
 
-    public static String BCrypt(String message) {
-        return "";
-    }
 }

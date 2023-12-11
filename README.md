@@ -12,6 +12,7 @@ java Password <password> <technique> <hashType>
 <password>: The target password you want to crack.
 <technique>: The technique to use for cracking. Use -bf for brute force or -d for dictionary.
 <hashType>: The type of hash used for the password. Use -p for plaintext, -m for MD5, -b for BCrypt, and -s for SHA256.
+<RainbowTable>: For dictionary attacks, use -rt to use a Rainbow Table for password craacking. (NOTE: ONLY FOR DICTIONARY ATTACK)
 ```
 
 ## Examples
